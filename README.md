@@ -16,25 +16,24 @@ This project demonstrates how to connect a MySQL database with a backend server 
 - 🗑️ Delete records
 
 
+
 ## 📦 Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Khalil-deve/backend-crud-with-mysql.git
-````
+    https://github.com/Khalil-deve/backend-crud-with-mysql
+
 
 2. Install dependencies:
 
-   ```bash
-   npm install
-   ```
+npm install
+
 
 3. Set up your MySQL database and update the credentials in `config/db.js` or `.env` file.
 
 4. Start the server:
 
-   ```bash
-   node index.js
-   ```
+node app.js
+
 
 
