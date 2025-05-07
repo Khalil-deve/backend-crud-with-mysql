@@ -1,71 +1,94 @@
-/* /css/ShowData.css */
-
 body {
-  background: linear-gradient(135deg, #f8fafc, #e0f2fe);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f2f2f2;
 }
 
 h2 {
-  color: #0f172a;
-  font-weight: bold;
-  border-bottom: 2px solid #3b82f6;
-  padding-bottom: 10px;
-  margin-bottom: 30px;
+  text-align: center;
+  color: #333;
 }
 
-.table th {
-  background-color: #7b899e !important;
+.table-container {
+  margin-bottom: 50px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #4CAF50;
   color: white;
-  font-size: 1rem;
-  text-align: center;
 }
 
-.table td {
-  text-align: center;
-  vertical-align: middle;
+tr:hover {
+  background-color: #f1f1f1;
 }
 
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
 
-.alert {
-  font-size: 1.1rem;
-  padding: 15px 25px;
-  border-radius: 10px;
+.btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-edit {
+  background-color: #2196F3 !important;
+  color: white !important;
+}
+
+.btn-delete {
+  background-color: #f44336 !important;
+  color: white !important;
 }
 
 @media (max-width: 768px) {
-  h2 {
-    font-size: 1.5rem;
+  table, thead, tbody, th, td, tr {
+    display: block;
   }
 
-  .table th, .table td {
-    font-size: 0.9rem;
+  th {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
   }
 
-  .btn {
-    font-size: 0.8rem;
-    padding: 6px 12px;
+  tr {
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 10px;
+  }
+
+  td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    font-weight: bold;
+    color: #555;
   }
 }
-
-
-.table-responsive-custom {
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
-    display: block;
-    white-space: nowrap;
-  }
-
-  /* Optional: always show scrollbar for better UX on smaller screens */
-  .table-responsive-custom::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  .table-responsive-custom::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
-  }
-
-  .table-responsive-custom::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }

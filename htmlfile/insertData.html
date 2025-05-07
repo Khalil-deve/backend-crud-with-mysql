@@ -7,43 +7,87 @@
   <link rel="stylesheet" href="./css/InsertData.css">
 </head>
 <body>
+
+  <!-- Course Registration Form -->
   <div class="form-container">
-    <form id="signupForm" novalidate>
-      <h2>Signup Form</h2>
+    <form id="signupFormCourse" novalidate>
+      <h2>Course Registration</h2>
 
       <div class="form-group">
-        <label for="registration">Registration No.</label>
-        <input type="text" id="registration" name="registration" required>
+        <label for="course_id_course">Course ID</label>
+        <input type="text" id="course_id_course" name="course_id" required>
         <span class="error"></span>
       </div>
 
       <div class="form-group">
-        <label for="firstname">First Name</label>
-        <input type="text" id="firstname" name="firstname" required>
+        <label for="course_name">Course Name</label>
+        <input type="text" id="course_name" name="course_name" required>
         <span class="error"></span>
       </div>
 
       <div class="form-group">
-        <label for="lastname">Last Name</label>
-        <input type="text" id="lastname" name="lastname" required>
+        <label for="instructor_name">Instructor Name</label>
+        <input type="text" id="instructor_name" name="instructor_name" required>
+        <span class="error"></span>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <!-- Student Registration Form -->
+  <div class="form-container">
+    <form id="signupFormStudent" novalidate>
+      <h2>Student Registration</h2>
+
+      <div class="form-group">
+        <label for="student_id_student">Registration No.</label>
+        <input type="text" id="student_id_student" name="student_id" required>
         <span class="error"></span>
       </div>
 
       <div class="form-group">
-        <label for="address">Address</label>
-        <textarea id="address" name="address" rows="3" required></textarea>
-        <span class="error"></span>
-      </div>
-
-      <div class="form-group">
-        <label for="phone">Phone</label>
-        <input type="tel" id="phone" name="phone" required pattern="^\d{10}$">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
         <span class="error"></span>
       </div>
 
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required>
+        <span class="error"></span>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <!-- Enrollment Registration Form -->
+  <div class="form-container">
+    <form id="signupFormEnrollment" novalidate>
+      <h2>Enrollment Registration</h2>
+
+      <div class="form-group">
+        <label for="enrollment_id">Enrollment ID</label>
+        <input type="text" id="enrollment_id" name="enrollment_id" required>
+        <span class="error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="student_id_enrollment">Student ID</label>
+        <input type="text" id="student_id_enrollment" name="student_id" required>
+        <span class="error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="course_id_enrollment">Course ID</label>
+        <input type="text" id="course_id_enrollment" name="course_id" required>
+        <span class="error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="grade">Grade</label>
+        <input type="text" id="grade" name="grade" required>
         <span class="error"></span>
       </div>
 

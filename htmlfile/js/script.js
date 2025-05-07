@@ -1,13 +1,16 @@
-document.getElementById('signupForm').addEventListener('submit', async function (e) {
-    e.preventDefault(); // Prevent form submission
-  
+// ====== Student Form Handler ======
+const studentForm = document.getElementById('signupFormStudent');
+if (studentForm) {
+  studentForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
     let valid = true;
-    const fields = ['registration', 'firstname', 'lastname', 'address', 'phone', 'email'];
-  
+    const fields = ['student_id_student', 'name', 'email'];
+
     fields.forEach(field => {
       const input = document.getElementById(field);
       const error = input.nextElementSibling;
-  
+
       if (!input.value.trim()) {
         error.textContent = 'This field is required.';
         error.style.display = 'block';
@@ -16,16 +19,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
         error.textContent = '';
         error.style.display = 'none';
       }
-  
-      if (field === 'phone') {
-        const phonePattern = /^\d{11}$/;
-        if (!phonePattern.test(input.value.trim())) {
-          error.textContent = 'Enter a valid 10-digit phone number.';
-          error.style.display = 'block';
-          valid = false;
-        }
-      }
-  
+
       if (field === 'email') {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(input.value.trim())) {
@@ -35,64 +29,109 @@ document.getElementById('signupForm').addEventListener('submit', async function 
         }
       }
     });
-  
+
     if (valid) {
-        const userData = {
-          registration: document.getElementById('registration').value.trim(),
-          firstname: document.getElementById('firstname').value.trim(),
-          lastname: document.getElementById('lastname').value.trim(),
-          address: document.getElementById('address').value.trim(),
-          phone: document.getElementById('phone').value.trim(),
-          email: document.getElementById('email').value.trim()
-        };
-      
-        console.log(userData); // Optional: view the object in console
-      
-        try {
-          const response = await fetch('http://localhost:3000/form/contact', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json' // Sending JSON data
-              },
-              body: JSON.stringify(userData)// Convert JS object to JSON string
-          })
-          const data = await response.json(); // Parse JSON response
-          if (response.ok) {
-              console.log('Success:', data);
-              // Store the flash message flag in localStorage
-              localStorage.setItem('flashMessage', 'Success! Your SQL command executed successfully.');
-
-              // ✅ Redirect to another page
-              window.location.href = "index.html";  // or "/index.html" if in root
-              console.log('the status code:', response.status);
-          } else {
-
-              localStorage.setItem('flashMessage', 'Error! Your SQL command failed.');
-              // Handle errors here
-              console.error('Error:', data.error);
-          }
-      } catch (err) {
-          console.error('Error:', err);
-      }
-
-      //   // Now send this to the server
-      //   fetch('http://localhost:3000/form/contact', {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json'
-      //     },
-      //     body: JSON.stringify(userData)
-      //   })
-      //   .then(res => res.json())
-      //   .then(data => {
-      //     alert('Registration successful!');
-      //     console.log(data);
-      //   })
-      //   .catch(err => {
-      //     console.error('Error:', err);
-      //     alert('An error occurred while submitting the form.');
-      //   });
-      }
-      
+      const userData = {
+        student_id: document.getElementById('student_id_student').value.trim(),
+        student_name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim()
+      };
+      console.log(userData);
+      await submitForm('http://localhost:3000/form/contact', userData, 'Student registration');
+    }
   });
-  
+}
+
+// ====== Course Form Handler ======
+const courseForm = document.getElementById('signupFormCourse');
+if (courseForm) {
+  courseForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    let valid = true;
+    const fields = ['course_id_course', 'course_name', 'instructor_name'];
+
+    fields.forEach(field => {
+      const input = document.getElementById(field);
+      const error = input.nextElementSibling;
+
+      if (!input.value.trim()) {
+        error.textContent = 'This field is required.';
+        error.style.display = 'block';
+        valid = false;
+      } else {
+        error.textContent = '';
+        error.style.display = 'none';
+      }
+    });
+
+    if (valid) {
+      const courseData = {
+        course_id: document.getElementById('course_id_course').value.trim(),
+        course_name: document.getElementById('course_name').value.trim(),
+        instructor_name: document.getElementById('instructor_name').value.trim(),
+      };
+      console.log(courseData);
+      await submitForm('http://localhost:3000/form/course', courseData, 'Course registration');
+    }
+  });
+}
+
+// ====== Enrollment Form Handler ======
+const enrollmentForm = document.getElementById('signupFormEnrollment');
+if (enrollmentForm) {
+  enrollmentForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    let valid = true;
+    const fields = ['enrollment_id', 'student_id_enrollment', 'course_id_enrollment', 'grade'];
+
+    fields.forEach(field => {
+      const input = document.getElementById(field);
+      const error = input.nextElementSibling;
+
+      if (!input.value.trim()) {
+        error.textContent = 'This field is required.';
+        error.style.display = 'block';
+        valid = false;
+      } else {
+        error.textContent = '';
+        error.style.display = 'none';
+      }
+    });
+
+    if (valid) {
+      const enrollmentData = {
+        enrollment_id: document.getElementById('enrollment_id').value.trim(),
+        student_id: document.getElementById('student_id_enrollment').value.trim(),
+        course_id: document.getElementById('course_id_enrollment').value.trim(),
+        grade: document.getElementById('grade').value.trim()
+      };
+      console.log(enrollmentData);
+      await submitForm('http://localhost:3000/form/enrollment', enrollmentData, 'Enrollment');
+    }
+  });
+}
+
+// ====== Universal Form Submitter Function ======
+async function submitForm(endpoint, dataObject, actionName) {
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dataObject)
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      localStorage.setItem('flashMessage', `Success! ${actionName} completed.`);
+      window.location.href = "index.html";
+    } else {
+      localStorage.setItem('flashMessage', `Error! ${actionName} failed.`);
+      console.error('Error:', data.error);
+    }
+  } catch (err) {
+    console.error(`Network Error during ${actionName}:`, err);
+  }
+}
